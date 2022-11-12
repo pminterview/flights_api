@@ -1,0 +1,52 @@
+version: '3'
+services:
+    nginx:
+        build:
+            context: ./docker/nginx
+            dockerfile: Dockerfile
+        ports:
+            - '80:80'
+            - '443:443'
+        volumes:
+            - .:/var/www/html
+            - ./docker/nginx/default.conf:/etc/nginx/sites-available/default
+        networks:
+            - main
+        depends_on:
+            - app
+    app:
+        build:
+            context: ./docker/php
+            dockerfile: Dockerfile
+        volumes:
+            - '.:/var/www/html'
+        networks:
+            - main
+        depends_on:
+            - mariadb
+    mariadb:
+        image: 'mariadb:10'
+        ports:
+            - '${FORWARD_DB_PORT:-3306}:3306'
+        environment:
+            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_DATABASE: '${DB_DATABASE}'
+            MYSQL_USER: '${DB_USERNAME}'
+            MYSQL_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+        volumes:
+            - './docker/db/data:/var/lib/mysql'
+        networks:
+            - main
+        healthcheck:
+            test: ["CMD", "mysqladmin", "ping", "-p${DB_PASSWORD}"]
+            retries: 3
+            timeout: 5s
+networks:
+    main:
+        driver: bridge
+volumes:
+    sailmariadb:
+        driver: local
+    sailredis:
+        driver: local
