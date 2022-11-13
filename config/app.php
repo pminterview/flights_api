@@ -3,6 +3,7 @@
 return [
 
     'api_version' => env('API_VERSION', 1),
+    'api_latest_version' => env('API_LATEST_VERSION', 1),
 
     /*
     |--------------------------------------------------------------------------

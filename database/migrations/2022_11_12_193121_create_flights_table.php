@@ -14,12 +14,12 @@ class CreateFlightsTable extends Migration
     public function up()
     {
         Schema::create('flights', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->uuid('id')->primary()->unique();
             $table->string('airline_iata');
             $table->integer('flight_number');
             $table->string('from_code');
             $table->string('to_code');
-            $table->timestamp('departure_date_utc');
+            $table->timestamp('departure_date_utc')->index();
             $table->timestamps();
         });
     }

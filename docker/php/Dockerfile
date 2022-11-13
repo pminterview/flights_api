@@ -31,7 +31,5 @@ RUN docker-php-ext-install exif pcntl bz2 zip
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-RUN php artisan migrate
-RUN php artisan db:seed
-RUN php artisan key:generate
+
 EXPOSE 9000

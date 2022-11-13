@@ -1,18 +1,10 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
+//podstawowa konfiguracja route prefix, namespace itp jest w RouteServiceProvider
+
 
 Route::resource('flights', FlightController::class)
-    ->except(['edit', 'destroy', 'create']);
+    ->parameter('flight', 'flight:uuid')
+    ->except(['edit', 'destroy', 'create', 'show']);

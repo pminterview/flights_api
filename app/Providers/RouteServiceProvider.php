@@ -38,10 +38,13 @@ class RouteServiceProvider extends ServiceProvider
         $this->configureRateLimiting();
         $this->routes(function () {
             Route::prefix('api/v1')
-                ->middleware('api')->middleware('api_version:v1')
+                ->middleware(['api_version:v1', 'api'])
                 ->namespace("$this->namespace\V1")
                 ->group(base_path('routes/api_v1.php'));
         });
+        // możliwe, że można byłoby to zrobić bardziej generycznie, np. informacje można by było trzymać w config
+        // [prefix => 'api/v2', path => 'routes/api_v2.php', 'is_on' => false , 'limit' => 6000 ...]
+        // i foreach w osobnej metodzie
     }
 
     /**
@@ -51,7 +54,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function configureRateLimiting()
     {
-        RateLimiter::for('api/v1', function (Request $request) {
+        RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(6000)->by(optional($request->user())->id ?: $request->ip());
         });
     }
