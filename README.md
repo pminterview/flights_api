@@ -1,6 +1,7 @@
 Uruchamiamy apkę:
 
 copy .env.example .env
+
 docker-compose up -d
 
 docker-compose exec app bash
