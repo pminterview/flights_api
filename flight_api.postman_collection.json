@@ -1,0 +1,113 @@
+{
+	"info": {
+		"_postman_id": "c5b9b583-3de4-4bd1-b56c-1a38ef346bfe",
+		"name": "flight_api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2185418"
+	},
+	"item": [
+		{
+			"name": "Index",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost/api/v1/flights?per_page=3&page=1",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"v1",
+						"flights"
+					],
+					"query": [
+						{
+							"key": "per_page",
+							"value": "3"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Store",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"airline_iata\":\"FR\",\r\n    \"flight_number\": 1024,\r\n    \"departure_date_utc\": \"2022-01-19 09:10:00\",\r\n    \"from_code\":\"OTP\",\r\n    \"to_code\":\"STN\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost/api/v1/flights",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"v1",
+						"flights"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"airline_iata\":\"FR\",\r\n    \"flight_number\": 1024,\r\n    \"departure_date_utc\": \"2022-01-19 09:10:00\",\r\n    \"from_code\":\"OTP\",\r\n    \"to_code\":\"STN\"\r\n}"
+				},
+				"url": {
+					"raw": "localhost/api/v1/flights/604d9a83-ddcf-4f84-87fc-bd9dd7d5d50a",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"v1",
+						"flights",
+						"604d9a83-ddcf-4f84-87fc-bd9dd7d5d50a"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
